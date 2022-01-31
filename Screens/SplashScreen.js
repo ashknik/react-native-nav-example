@@ -38,7 +38,7 @@ const height_logo = height * 0.28;
 const styles = StyleSheet.create({
         appButtonContainer: {
                 elevation: 8,
-                backgroundColor: "#009688",
+                backgroundColor: "#abdbe3",
                 borderRadius: 10,
                 paddingVertical: 10,
                 paddingHorizontal: 12

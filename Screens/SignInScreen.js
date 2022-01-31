@@ -9,8 +9,52 @@ import { AuthContext } from '../components/AuthContext';
 
 const SigInScreen = ({navigation}) =>{
 
+    const [data,setData]  = React.useState({
+        userName:'',
+        password:''
+    })
+
+    const textInputChange = (val) => {
+        if( val.trim().length >= 4 ) {
+            setData({
+                ...data,
+                userName: val,
+            });
+        }
+    }
+
+    const passwordInputChange = (val) => {
+        if( val.trim().length >= 4 ) {
+            setData({
+                ...data,
+                password: val,
+            });
+        }
+    }
+
 
     const { signIn } =  React.useContext(AuthContext);
+
+
+    const loginHandle = (userName, password) => {
+
+        // const foundUser = Users.filter( item => {
+        //     return userName == item.username && password == item.password;
+        // } );
+
+        if ( data.userName.length == 0 || data.password.length == 0 ) {
+            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
+
+
+
+        signIn(userName,password);
+
+       
+    }
 
 return(<View style={styles.container} >
             <View  style={styles.header}>
@@ -27,13 +71,15 @@ return(<View style={styles.container} >
                     size={20}
                 />
                 <TextInput 
+                  
                     placeholder="doe@email.com"
                     placeholderTextColor="#666666"
                     style={[styles.textInput, {
                         color: "#101011"
                     }]}
+                    onChangeText={(val) => textInputChange(val)}
                     autoCapitalize="none"
-                  
+                   
                 />
                 </View>
 
@@ -46,6 +92,7 @@ return(<View style={styles.container} >
                             size={20}
                         />
                         <TextInput 
+                            
                             placeholder="Your Password"
                             secureTextEntry={true}
                             placeholderTextColor="#666666"
@@ -53,7 +100,7 @@ return(<View style={styles.container} >
                                 color: "#101011"
                             }]}
                             autoCapitalize="none"
-                        
+                            onChangeText={(val) => passwordInputChange(val)}
                         />
                       
                         </View>
@@ -61,7 +108,7 @@ return(<View style={styles.container} >
                         <View style={styles.button}>
                 <TouchableOpacity
                     style={styles.signIn}
-                    onPress={() => signIn()}
+                    onPress={() => loginHandle(data.userName,data.password)}
                 >
               
                     <Text style={[styles.textSign, {
