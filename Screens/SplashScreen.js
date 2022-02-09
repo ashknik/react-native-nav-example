@@ -32,7 +32,7 @@ const SplashScreen = ({ navigation }) => {
         </View>)
 }
 const { height } = Dimensions.get("screen");
-const height_logo = height * 0.28;
+const height_logo = height * 0.18;
 
 
 const styles = StyleSheet.create({
